@@ -12,7 +12,9 @@ export class RecipeDetailComponent implements OnInit {
 
   recipe !: Recipe;
 
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private recipeService: RecipeService, 
+    private route: ActivatedRoute, 
+    private router: Router) { }
 
   onAddToShoppingList() {
     console.log(this.recipe.ingredients)
@@ -28,5 +30,10 @@ export class RecipeDetailComponent implements OnInit {
     this.route.params.subscribe((params) => {
         this.recipe = this.recipeService.getRecipe(+params['id']);
     });
+  }
+
+  onDeleteRecipe() {
+    this.recipeService.deleteRecipe(this.recipe.id);
+    this.router.navigate(['/recipes']);
   }
 }
